@@ -1,0 +1,212 @@
+---
+title: "R Notebook"
+output:
+  html_document:
+    df_print: paged
+---
+**Q1: IMS platformunun belirlenmesi**
+-------------------------------------
+
+**Platform İsmi:** SuiteCRM
+
+**Lisans:** Açık Kaynak (GPLv3)
+
+**Kısa Tarihçe:**
+
+*   2004 yılında SugarCRM Community Edition'dan bir çatal olarak ortaya çıktı.
+*   2010 yılında bağımsız bir proje haline geldi.  
+*   Hızla popülerlik kazandı ve şu anda dünyanın en popüler açık kaynaklı CRM platformlarından biri. 
+
+**Platformun Kullanıcıya Sunduğu Özellikler:**
+
+*   **Satış Yönetimi:** Potansiyel müşterileri yönetme, teklifler oluşturma, fırsatları izleme ve satışları kapatma
+
+*   **Müşteri Hizmetleri:** Destek taleplerini yönetme, bilgi tabanı oluşturma ve müşteri geri bildirimlerini toplama
+
+*   **Pazarlama Otomasyonu:** E-posta kampanyaları oluşturma, potansiyel müşterileri besleme ve müşteri segmentasyonu
+    
+*   **Raporlama ve Analiz:** Satış, pazarlama ve müşteri hizmetleri verilerini analiz etme
+
+*   **Ürün Yönetimi:** Ürün kataloğu oluşturma, stok seviyelerini takip etme ve siparişleri işleme
+
+*   **Proje Yönetimi:** Görevleri ve projeleri yönetme, zaman takibi ve iş birliği
+
+*   **Eklentiler ve Özelleştirme:** SuiteCRM'yi ihtiyaçlarınıza göre özelleştirmek için geniş bir eklenti kütüphanesi mevcuttur
+
+**Platformun Kullandığı Yazılım, DB ve Diğer Teknolojiler:**
+
+**1\. Teknolojiler:**
+
+*   **Programlama Dili:** SuiteCRM, PHP programlama dilini kullanır. Bu, platformun geniş bir PHP tabanlı geliştirici kitlesi ve kaynaklara erişim sağlar.
+    
+*   **Veritabanı:** SuiteCRM, MySQL, MariaDB ve PostgreSQL gibi popüler ilişkisel veritabanı yönetim sistemlerini destekler. Bu, kullanıcıların mevcut altyapılarına uyum sağlamalarını kolaylaştırır.
+    
+*   **Web Sunucusu:** Apache ve Nginx gibi yaygın web sunucuları üzerinde çalışabilir. Bu da platformun farklı web sunucusu yapılandırmalarına uyum sağlayabilmesini sağlar.
+    
+*   **Diğer Teknolojiler:** HTML, CSS ve JavaScript gibi standart web teknolojileri, SuiteCRM'in kullanıcı arayüzü ve kullanıcı deneyimini geliştirmek için kullanılır.
+    
+
+**2\. Entegrasyon Yetenekleri:**
+
+*   **REST API:** SuiteCRM, RESTful API'ler aracılığıyla farklı sistemlerle entegrasyon sağlar. Bu API, üçüncü taraf uygulamaların SuiteCRM ile etkileşime girmesini ve veri alışverişinde bulunmasını sağlar. Müşteri, potansiyel müşteri, fırsat, ürün gibi verileri oluşturma, okuma, güncelleme ve silme işlemleri gibi çeşitli işlemleri gerçekleştirmek için kullanılabilir.
+    
+*   **E-posta Entegrasyonu:** SuiteCRM, popüler e-posta sağlayıcılarıyla entegrasyon imkanı sunar. Bu, kullanıcıların e-posta kampanyalarını SuiteCRM içinden yönetmelerine ve e-posta etkileşimlerini takip etmelerine olanak tanır.
+    
+*   **Dış Uygulama Entegrasyonu:** SuiteCRM, diğer iş uygulamalarıyla entegrasyon için birçok seçenek sunar. Örneğin, muhasebe yazılımlarıyla entegrasyon, e-ticaret platformlarıyla entegrasyon ve diğer CRM sistemleriyle entegrasyon gibi.
+    
+*   **Özelleştirilebilir Entegrasyonlar:** SuiteCRM, özel entegrasyon ihtiyaçlarını karşılamak için özelleştirilebilir entegrasyon noktaları sağlar. Bu, kullanıcıların belirli iş gereksinimlerini karşılamak için entegrasyonları özelleştirmelerine olanak tanır.
+
+**Platform API Sunuyor mu?**
+
+Evet, SuiteCRM REST API sunar. Bu API, üçüncü taraf uygulamaların SuiteCRM ile etkileşime girmesine ve veri alışverişinde bulunmasına olanak tanır.  API’ın başlıca özellikleri şunlardır:
+
+*   login
+
+*   logout
+
+*   get_available_modules 
+
+*   get_document_revision 
+
+*   get_entries 
+
+*   set_entry 
+
+*   set_document_revision 
+
+*   set_relationships 
+
+*   set_note_attachment
+
+API, şunlar dahil olmak üzere çeşitli işlemleri gerçekleştirmek için kullanılabilir:
+
+*   Müşteri, potansiyel müşteri, fırsat ve ürün gibi verileri oluşturma, okuma, güncelleme ve silme
+    
+*   E-posta kampanyaları oluşturma ve gönderme
+    
+*   Raporlar oluşturma
+    
+*   Görevleri ve projeleri yönetme
+    
+
+**SuiteCRM'yi seçmemizin birkaç nedeni var::**
+
+
+*   **Açık Kaynak:** SuiteCRM ücretsiz ve açık kaynaklı bir platformdur. Bu, onu diğer ticari CRM platformlarından daha uygun maliyetli bir seçenek haline getirir. Ayrıca, SuiteCRM'nin kodunu incelememe ve ihtiyaçlarımıza göre özelleştirmemize olanak tanır.
+
+*   **Esneklik:** SuiteCRM, çok çeşitli özellikler ve eklentiler sunan oldukça esnek bir platformdur. Bu, işletmemizin özel gereksinimlerini karşılamak için özelleştirebileceğimiz  anlamına gelir.
+    
+*   **Büyük Topluluk:** SuiteCRM'nin büyük ve aktif bir topluluğu vardır. Bu, herhangi bir sorunla karşılaştığımızda yardım bulabileceğimiz anlamına gelir.
+
+**Özel İlgi Alanlarımız:**
+
+*   **Veri Sahipliği:** SuiteCRM'nin açık kaynaklı olması, verilerimizin üzerinde tam kontrol sahibi olmamızı sağlıyor.
+
+*   **Güvenlik:** SuiteCRM, işletmelerin verilerini korumak için çeşitli güvenlik özellikleri sunar.
+
+*   **Ölçeklenebilirlik:** SuiteCRM, küçük işletmelerden büyük kuruluşlara kadar her ölçekteki işletme için uygun bir platformdur.
+    
+**Sektör Hacmi:**
+
+*   SuiteCRM, küçük işletmelerden büyük ölçekli kuruluşlara kadar çeşitli sektörlerde kullanılmaktadır. Bu, geniş bir sektörel yayılımı temsil eder.
+    
+*   Açık kaynaklı olması nedeniyle, SuiteCRM'nin kullanımı özellikle KOBİ'ler ve bütçe kısıtlı kuruluşlar için cazip hale gelir.
+    
+*   Küresel olarak, SuiteCRM kullanıcılarının sayısı her geçen gün artmaktadır, bu da platformun sektördeki önemini ve kabulünü göstermektedir.
+    
+
+**Popülerlik:**
+
+*   SuiteCRM, açık kaynaklı CRM platformları arasında önde gelen bir konumdadır.
+    
+*   Platformun büyük ve aktif bir topluluğu vardır. Bu topluluk, kullanıcıların birbirlerine yardım etmesini, sorunları çözmelerini ve platformun gelişimine katkıda bulunmalarını sağlar.
+    
+*   SuiteCRM, dünya genelinde birçok farklı sektördeki işletmeler tarafından tercih edilmektedir. Bu da platformun geniş bir kullanıcı tabanına sahip olduğunu gösterir.
+    
+*   Platformun sürekli olarak güncellenmesi ve geliştirilmesi, kullanıcıların ilgisini canlı tutar ve yeni özelliklerin eklenmesiyle popülerliğini artırır.
+
+Genel olarak, SuiteCRM'nin ihtiyaçlarımıza en uygun CRM platformu olduğuna inanıyoruz.SuiteCRM, sektörde geniş bir kullanıcı tabanına ve aktif bir topluluğa sahip popüler bir açık kaynaklı CRM platformudur.Bu da platformun güvenilirliğini ve kabulünü gösterir.
+
+**Q2 : Dataset tanımı**
+-------------------------------------
+
+**Veri setinin ;**
+
+*   **Adresi :** [https://query.data.world/s/37q4qpstsvfrnz252cek3hc4tbhb65?dws=00000](https://query.data.world/s/37q4qpstsvfrnz252cek3hc4tbhb65?dws=00000)
+
+*   **İçeriği :** İçerik olarak 3000’in üzerinde şirketin ; isim,adres, faaliyet alanı,ürün ve fırsat verileri, işlem hacimleri, üç aylık periyotta (QTD) satış performansları, coğrafi konum bilgileri gibi üst bilgilerden oluşmaktadır. 
+
+*   **Üretim Aşamaları :** Veri seti şirketlerin 3 aylık periyotlarda yaptığı satış performanslarının yeni satış stratejilerinin geliştirilmesine olanak sunulduğu bir araç tarafından üretilmiştir.
+
+*   **Formatı :** Veri seti XSLX formatında bir Excel dokümanıdır.
+
+*   **Boyutu :** Byte cinsinden 656 KB olup, 38 kolon ve 3215 satırdan oluşmaktadır.
+
+*   **Verinin IMS’e ithal edilişi :** Veri setini IMS’e ithal ederken öncelikle SuiteCRM’in veri tabanı yapısına uygun hale getireceğiz, bunun için SuiteCRM’in dashboard’undan Data Import kısmının bize sunduğu veri şablonunu kullanacağız. Veri setinin Şablona uyarlamasını sağladıktan sonra Data Import kısmından veriyi içeri aktaracağız.
+
+
+*   **Verinin Analizi İçin R ortamına Aktarılması :** Verinin R ortamına aktarılması için R programlama dilinin RODBC adlı paketini kullanacağız. Burada SuiteCRM verisini ODBC veri kaynağı olarak kullanıp analizleri sağlayacağız.
+
+
+**Q3: İş Tanımı**
+-------------------------------------
+
+Data Crafters, CRM Hizmetleri ve Veri Analizi Danışmanlığı alanında faaliyet  göstermektedir. Bu kuruluş, işletmelerin müşteri ilişkilerini yönetmek ve müşteri verilerini  analiz etmek için entegre bir yaklaşıma sahiptir. SuiteCRM gibi CRM (Müşteri İlişkileri  Yönetimi) yazılımlarını kullanarak müşterilerine işlerini daha iyi yönetmeleri için analiz ve  strateji önerileri sunar. İşletme, veri analizi, müşteri ilişkileri, satış, pazarlama ve iş  süreçlerinin optimizasyonu gibi alanlarda müşterilerine danışmanlık hizmeti sunar.  
+
+**Aktiviteler ve Rutin Operasyonlar:**  
+
+*   Müşteri İlişkileri Yönetimi: SuiteCRM kullanarak müşterilerin müşteri etkileşimlerini  yönetmelerine yardımcı olmak.  
+  
+*   Veri Analizi: Müşteri, satış, pazarlama, stok, proje yönetimi gibi farklı kaynaklardan gelen  verileri R kodu kullanarak analiz etmek.  
+  
+*   Stratejik Danışmanlık: Müşterilerin satış stratejilerini belirlemek için veri analizini  kullanarak raporlar ve öneriler sunmak.  
+  
+*   Pazarlama Danışmanlığı: Müşterilere pazarlama kampanyalarını optimize etmeleri ve  müşteri segmentasyonunu geliştirmeleri için rehberlik sağlamak.  
+  
+*   Satış Süreçleri Optimizasyonu: Satış performansının arttırılması için önceki periyotların analizinin yapılması ve analizler sonucunda yeni satış stratejilerinin geliştirilmesi.
+  
+**Gelir Modeli:**  
+
+Gelir modeli, müşterilere sunulan danışmanlık hizmetleri ve özel raporlamalar üzerine  kurulmuştur. İşletme, danışmanlık projeleri için sabit ücretler veya saatlik ücretler talep eder.  Ayrıca, CRM yazılımı entegrasyonu ve özelleştirilmiş raporlama hizmetleri gibi ek gelir  kaynaklarına sahiptir. 
+
+**İş Modelinin Zorlukları ve Avantajları:**  
+**Zorluklar:**  
+  
+1. Müşteri verilerinin hassasiyeti ve gizliliği nedeniyle veri güvenliği konusunda yüksek  standartlara sahip olmak.  
+  
+2. Müşterilerin taleplerinin değişkenliği ve karmaşıklığı.  
+  
+3. Teknolojik gelişmeler ve yazılım güncellemeleriyle sürekli uyum sağlama gerekliliği.  
+
+**Avantajlar:**  
+  
+1. Müşteri verileri ve analizlerine dayalı güçlü içgörüler sağlama kapasitesi.   
+
+2. Müşteri ilişkileri yönetimi ve iş analizi alanında artan talep.  
+  
+3. Çeşitli sektörlerde geniş bir müşteri tabanı oluşturma potansiyeli.  
+
+**Gerçek Dünya Rakipleri ve Avantajları/Dezavantajları:**  
+
+Bu iş alanında birkaç farklı rakip türü bulunur: 
+
+*   **Büyük CRM Şirketleri:** Salesforce gibi şirketler, büyük ölçekli CRM hizmetleri  sunar. Avantajları, geniş müşteri tabanı ve kapsamlı ürün yelpazesidir. Dezavantajları,  kişiselleştirilmiş hizmet sunma konusunda zayıf olmalarıdır.  
+  
+*   **Bağımsız Danışmanlık Şirketleri:** Daha küçük ölçekte çalışan firmalar, genellikle  daha kişisel hizmet sunar. Avantajları, müşteri ile yakın ilişkiler kurabilmeleri ve esnek  olmalarıdır. Dezavantajları, büyük projeleri yürütme kapasitesinin sınırlı olmasıdır.  
+  
+*   **İç Kaynaklı CRM Takımları:** Bazı büyük şirketler, kendi CRM takımlarını kurarak  dış kaynak kullanmaktan kaçınır. Avantajları, şirket içi bilgi ve kontrolün sağlanmasıdır.  Dezavantajları, dış uzmanlığın getirdiği geniş perspektiften mahrum olmalarıdır.
+
+**Q4 İyileştirme (Optimizasyon) Stratejisi**
+-------------------------------------
+
+R kodu kullanarak gerçekleştireceğimiz veri analizi, SuiteCRM'nin sunduğu kapsamlı veri setlerini işleyerek işletme performansını artırmaya yönelik çeşitli faydalar sağlayabilir.
+
+**1.Karlılık Analizi:** SuiteCRM'nin satış ve finans verilerini R koduyla analiz ederek, karlılık potansiyelini artırmak için stratejik kararlar alabiliriz. Örneğin, hangi ürünlerin en yüksek kar marjına sahip olduğunu belirleyerek satış stratejilerini buna göre revize edebiliriz. Ayrıca sektör bazında pazar analizi yaparak satış performansı en yüksek Faaliyet Alanı belirleyebilir, bu alanda yapılacak satış performans stratejileri doğrultusunda yeni Fırsat tiplerine odaklanarak karlılığı arttırabiliriz.
+
+**2.Pazarlama Verimliliği:** SuiteCRM’nin müşteri pazar verilerini analiz ederek, sektörlerin hacimleri ve hangi fırsat tiplerinin en yüksek satış miktarına sahip olduğunu belirleyerek pazar analizi yapabiliriz. 
+
+**3.Verimlilik ve İş Süreçleri Optimizasyonu:** SuiteCRM'nin proje yönetimi ve iş süreçleri verilerini analiz ederek iş verimliliğini artırabiliriz. Hangi iş süreçlerinin en fazla zaman alıcı olduğunu belirleyerek bu süreçleri optimize edebiliriz. Ayrıca, SuiteCRM'nin işbirliği özelliklerini kullanarak ekip içi iletişimi ve işbirliğini artırabiliriz.
+
+**4.Maliyet Azaltma:** SuiteCRM'nin stok yönetimi ve sipariş verme verilerini analiz ederek maliyetleri azaltabiliriz. Stok seviyelerini optimize ederek fazla stok maliyetlerini azaltabilir ve sipariş verme süreçlerini iyileştirerek maliyetleri düşürebiliriz.
+
+Bu faydaları sağlamak için R koduyla yapacağımız veri analizi, SuiteCRM'den elde edilen verileri işleyerek önemli iş görüşlerine dönüştürecek ve stratejik karar alma süreçlerini destekleyecektir. Bu da işletmenin rekabet gücünü artırarak başarıya doğru bir adım atmasını sağlayacaktır.
