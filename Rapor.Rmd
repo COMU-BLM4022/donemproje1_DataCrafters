@@ -1,0 +1,128 @@
+---
+title: "R Notebook"
+output:
+  html_document:
+    df_print: paged
+---
+**Q1: IMS platformunun belirlenmesi**
+-------------------------------------
+
+**Platform İsmi:** SuiteCRM
+
+**Lisans:** Açık Kaynak (GPLv3)
+
+**Kısa Tarihçe:**
+
+*   2004 yılında SugarCRM Community Edition'dan bir çatal olarak ortaya çıktı.
+*   2010 yılında bağımsız bir proje haline geldi.  
+*   Hızla popülerlik kazandı ve şu anda dünyanın en popüler açık kaynaklı CRM platformlarından biri. 
+
+**Platformun Kullanıcıya Sunduğu Özellikler:**
+
+*   **Satış Yönetimi:** Potansiyel müşterileri yönetme, teklifler oluşturma, fırsatları izleme ve satışları kapatma
+
+*   **Müşteri Hizmetleri:** Destek taleplerini yönetme, bilgi tabanı oluşturma ve müşteri geri bildirimlerini toplama
+
+*   **Pazarlama Otomasyonu:** E-posta kampanyaları oluşturma, potansiyel müşterileri besleme ve müşteri segmentasyonu
+    
+*   **Raporlama ve Analiz:** Satış, pazarlama ve müşteri hizmetleri verilerini analiz etme
+
+*   **Ürün Yönetimi:** Ürün kataloğu oluşturma, stok seviyelerini takip etme ve siparişleri işleme
+
+*   **Proje Yönetimi:** Görevleri ve projeleri yönetme, zaman takibi ve iş birliği
+
+*   **Eklentiler ve Özelleştirme:** SuiteCRM'yi ihtiyaçlarınıza göre özelleştirmek için geniş bir eklenti kütüphanesi mevcuttur
+
+**Platformun Kullandığı Yazılım, DB ve Diğer Teknolojiler:**
+
+**1\. Teknolojiler:**
+
+*   **Programlama Dili:** SuiteCRM, PHP programlama dilini kullanır. Bu, platformun geniş bir PHP tabanlı geliştirici kitlesi ve kaynaklara erişim sağlar.
+    
+*   **Veritabanı:** SuiteCRM, MySQL, MariaDB ve PostgreSQL gibi popüler ilişkisel veritabanı yönetim sistemlerini destekler. Bu, kullanıcıların mevcut altyapılarına uyum sağlamalarını kolaylaştırır.
+    
+*   **Web Sunucusu:** Apache ve Nginx gibi yaygın web sunucuları üzerinde çalışabilir. Bu da platformun farklı web sunucusu yapılandırmalarına uyum sağlayabilmesini sağlar.
+    
+*   **Diğer Teknolojiler:** HTML, CSS ve JavaScript gibi standart web teknolojileri, SuiteCRM'in kullanıcı arayüzü ve kullanıcı deneyimini geliştirmek için kullanılır.
+    
+
+**2\. Entegrasyon Yetenekleri:**
+
+*   **REST API:** SuiteCRM, RESTful API'ler aracılığıyla farklı sistemlerle entegrasyon sağlar. Bu API, üçüncü taraf uygulamaların SuiteCRM ile etkileşime girmesini ve veri alışverişinde bulunmasını sağlar. Müşteri, potansiyel müşteri, fırsat, ürün gibi verileri oluşturma, okuma, güncelleme ve silme işlemleri gibi çeşitli işlemleri gerçekleştirmek için kullanılabilir.
+    
+*   **E-posta Entegrasyonu:** SuiteCRM, popüler e-posta sağlayıcılarıyla entegrasyon imkanı sunar. Bu, kullanıcıların e-posta kampanyalarını SuiteCRM içinden yönetmelerine ve e-posta etkileşimlerini takip etmelerine olanak tanır.
+    
+*   **Dış Uygulama Entegrasyonu:** SuiteCRM, diğer iş uygulamalarıyla entegrasyon için birçok seçenek sunar. Örneğin, muhasebe yazılımlarıyla entegrasyon, e-ticaret platformlarıyla entegrasyon ve diğer CRM sistemleriyle entegrasyon gibi.
+    
+*   **Özelleştirilebilir Entegrasyonlar:** SuiteCRM, özel entegrasyon ihtiyaçlarını karşılamak için özelleştirilebilir entegrasyon noktaları sağlar. Bu, kullanıcıların belirli iş gereksinimlerini karşılamak için entegrasyonları özelleştirmelerine olanak tanır.
+
+**Platform API Sunuyor mu?**
+
+Evet, SuiteCRM REST API sunar. Bu API, üçüncü taraf uygulamaların SuiteCRM ile etkileşime girmesine ve veri alışverişinde bulunmasına olanak tanır.  API’ın başlıca özellikleri şunlardır:
+
+*   login
+
+*   logout
+
+*   get_available_modules 
+
+*   get_document_revision 
+
+*   get_entries 
+
+*   set_entry 
+
+*   set_document_revision 
+
+*   set_relationships 
+
+*   set_note_attachment
+
+API, şunlar dahil olmak üzere çeşitli işlemleri gerçekleştirmek için kullanılabilir:
+
+*   Müşteri, potansiyel müşteri, fırsat ve ürün gibi verileri oluşturma, okuma, güncelleme ve silme
+    
+*   E-posta kampanyaları oluşturma ve gönderme
+    
+*   Raporlar oluşturma
+    
+*   Görevleri ve projeleri yönetme
+    
+
+**SuiteCRM'yi seçmemizin birkaç nedeni var::**
+
+
+*   **Açık Kaynak:** SuiteCRM ücretsiz ve açık kaynaklı bir platformdur. Bu, onu diğer ticari CRM platformlarından daha uygun maliyetli bir seçenek haline getirir. Ayrıca, SuiteCRM'nin kodunu incelememe ve ihtiyaçlarımıza göre özelleştirmemize olanak tanır.
+
+*   **Esneklik:** SuiteCRM, çok çeşitli özellikler ve eklentiler sunan oldukça esnek bir platformdur. Bu, işletmemizin özel gereksinimlerini karşılamak için özelleştirebileceğimiz  anlamına gelir.
+    
+*   **Büyük Topluluk:** SuiteCRM'nin büyük ve aktif bir topluluğu vardır. Bu, herhangi bir sorunla karşılaştığımızda yardım bulabileceğimiz anlamına gelir.
+
+**Özel İlgi Alanlarımız:**
+
+*   **Veri Sahipliği:** SuiteCRM'nin açık kaynaklı olması, verilerimizin üzerinde tam kontrol sahibi olmamızı sağlıyor.
+
+*   **Güvenlik:** SuiteCRM, işletmelerin verilerini korumak için çeşitli güvenlik özellikleri sunar.
+
+*   **Ölçeklenebilirlik:** SuiteCRM, küçük işletmelerden büyük kuruluşlara kadar her ölçekteki işletme için uygun bir platformdur.
+    
+**Sektör Hacmi:**
+
+*   SuiteCRM, küçük işletmelerden büyük ölçekli kuruluşlara kadar çeşitli sektörlerde kullanılmaktadır. Bu, geniş bir sektörel yayılımı temsil eder.
+    
+*   Açık kaynaklı olması nedeniyle, SuiteCRM'nin kullanımı özellikle KOBİ'ler ve bütçe kısıtlı kuruluşlar için cazip hale gelir.
+    
+*   Küresel olarak, SuiteCRM kullanıcılarının sayısı her geçen gün artmaktadır, bu da platformun sektördeki önemini ve kabulünü göstermektedir.
+    
+
+**Popülerlik:**
+
+*   SuiteCRM, açık kaynaklı CRM platformları arasında önde gelen bir konumdadır.
+    
+*   Platformun büyük ve aktif bir topluluğu vardır. Bu topluluk, kullanıcıların birbirlerine yardım etmesini, sorunları çözmelerini ve platformun gelişimine katkıda bulunmalarını sağlar.
+    
+*   SuiteCRM, dünya genelinde birçok farklı sektördeki işletmeler tarafından tercih edilmektedir. Bu da platformun geniş bir kullanıcı tabanına sahip olduğunu gösterir.
+    
+*   Platformun sürekli olarak güncellenmesi ve geliştirilmesi, kullanıcıların ilgisini canlı tutar ve yeni özelliklerin eklenmesiyle popülerliğini artırır.
+
+Genel olarak, SuiteCRM'nin ihtiyaçlarımıza en uygun CRM platformu olduğuna inanıyoruz.SuiteCRM, sektörde geniş bir kullanıcı tabanına ve aktif bir topluluğa sahip popüler bir açık kaynaklı CRM platformudur.Bu da platformun güvenilirliğini ve kabulünü gösterir.
