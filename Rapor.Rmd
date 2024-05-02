@@ -195,3 +195,18 @@ Bu iş alanında birkaç farklı rakip türü bulunur:
 *   **Bağımsız Danışmanlık Şirketleri:** Daha küçük ölçekte çalışan firmalar, genellikle  daha kişisel hizmet sunar. Avantajları, müşteri ile yakın ilişkiler kurabilmeleri ve esnek  olmalarıdır. Dezavantajları, büyük projeleri yürütme kapasitesinin sınırlı olmasıdır.  
   
 *   **İç Kaynaklı CRM Takımları:** Bazı büyük şirketler, kendi CRM takımlarını kurarak  dış kaynak kullanmaktan kaçınır. Avantajları, şirket içi bilgi ve kontrolün sağlanmasıdır.  Dezavantajları, dış uzmanlığın getirdiği geniş perspektiften mahrum olmalarıdır.
+
+**Q4 İyileştirme (Optimizasyon) Stratejisi**
+-------------------------------------
+
+R kodu kullanarak gerçekleştireceğimiz veri analizi, SuiteCRM'nin sunduğu kapsamlı veri setlerini işleyerek işletme performansını artırmaya yönelik çeşitli faydalar sağlayabilir.
+
+**1.Karlılık Analizi:** SuiteCRM'nin satış ve finans verilerini R koduyla analiz ederek, karlılık potansiyelini artırmak için stratejik kararlar alabiliriz. Örneğin, hangi ürünlerin en yüksek kar marjına sahip olduğunu belirleyerek satış stratejilerini buna göre revize edebiliriz. Ayrıca sektör bazında pazar analizi yaparak satış performansı en yüksek Faaliyet Alanı belirleyebilir, bu alanda yapılacak satış performans stratejileri doğrultusunda yeni Fırsat tiplerine odaklanarak karlılığı arttırabiliriz.
+
+**2.Pazarlama Verimliliği:** SuiteCRM’nin müşteri pazar verilerini analiz ederek, sektörlerin hacimleri ve hangi fırsat tiplerinin en yüksek satış miktarına sahip olduğunu belirleyerek pazar analizi yapabiliriz. 
+
+**3.Verimlilik ve İş Süreçleri Optimizasyonu:** SuiteCRM'nin proje yönetimi ve iş süreçleri verilerini analiz ederek iş verimliliğini artırabiliriz. Hangi iş süreçlerinin en fazla zaman alıcı olduğunu belirleyerek bu süreçleri optimize edebiliriz. Ayrıca, SuiteCRM'nin işbirliği özelliklerini kullanarak ekip içi iletişimi ve işbirliğini artırabiliriz.
+
+**4.Maliyet Azaltma:** SuiteCRM'nin stok yönetimi ve sipariş verme verilerini analiz ederek maliyetleri azaltabiliriz. Stok seviyelerini optimize ederek fazla stok maliyetlerini azaltabilir ve sipariş verme süreçlerini iyileştirerek maliyetleri düşürebiliriz.
+
+Bu faydaları sağlamak için R koduyla yapacağımız veri analizi, SuiteCRM'den elde edilen verileri işleyerek önemli iş görüşlerine dönüştürecek ve stratejik karar alma süreçlerini destekleyecektir. Bu da işletmenin rekabet gücünü artırarak başarıya doğru bir adım atmasını sağlayacaktır.
