@@ -146,3 +146,52 @@ Genel olarak, SuiteCRM'nin ihtiyaçlarımıza en uygun CRM platformu olduğuna i
 
 
 *   **Verinin Analizi İçin R ortamına Aktarılması :** Verinin R ortamına aktarılması için R programlama dilinin RODBC adlı paketini kullanacağız. Burada SuiteCRM verisini ODBC veri kaynağı olarak kullanıp analizleri sağlayacağız.
+
+
+**Q3: İş Tanımı**
+-------------------------------------
+
+Data Crafters, CRM Hizmetleri ve Veri Analizi Danışmanlığı alanında faaliyet  göstermektedir. Bu kuruluş, işletmelerin müşteri ilişkilerini yönetmek ve müşteri verilerini  analiz etmek için entegre bir yaklaşıma sahiptir. SuiteCRM gibi CRM (Müşteri İlişkileri  Yönetimi) yazılımlarını kullanarak müşterilerine işlerini daha iyi yönetmeleri için analiz ve  strateji önerileri sunar. İşletme, veri analizi, müşteri ilişkileri, satış, pazarlama ve iş  süreçlerinin optimizasyonu gibi alanlarda müşterilerine danışmanlık hizmeti sunar.  
+
+**Aktiviteler ve Rutin Operasyonlar:**  
+
+*   Müşteri İlişkileri Yönetimi: SuiteCRM kullanarak müşterilerin müşteri etkileşimlerini  yönetmelerine yardımcı olmak.  
+  
+*   Veri Analizi: Müşteri, satış, pazarlama, stok, proje yönetimi gibi farklı kaynaklardan gelen  verileri R kodu kullanarak analiz etmek.  
+  
+*   Stratejik Danışmanlık: Müşterilerin satış stratejilerini belirlemek için veri analizini  kullanarak raporlar ve öneriler sunmak.  
+  
+*   Pazarlama Danışmanlığı: Müşterilere pazarlama kampanyalarını optimize etmeleri ve  müşteri segmentasyonunu geliştirmeleri için rehberlik sağlamak.  
+  
+*   Satış Süreçleri Optimizasyonu: Satış performansının arttırılması için önceki periyotların analizinin yapılması ve analizler sonucunda yeni satış stratejilerinin geliştirilmesi.
+  
+**Gelir Modeli:**  
+
+Gelir modeli, müşterilere sunulan danışmanlık hizmetleri ve özel raporlamalar üzerine  kurulmuştur. İşletme, danışmanlık projeleri için sabit ücretler veya saatlik ücretler talep eder.  Ayrıca, CRM yazılımı entegrasyonu ve özelleştirilmiş raporlama hizmetleri gibi ek gelir  kaynaklarına sahiptir. 
+
+**İş Modelinin Zorlukları ve Avantajları:**  
+**Zorluklar:**  
+  
+1. Müşteri verilerinin hassasiyeti ve gizliliği nedeniyle veri güvenliği konusunda yüksek  standartlara sahip olmak.  
+  
+2. Müşterilerin taleplerinin değişkenliği ve karmaşıklığı.  
+  
+3. Teknolojik gelişmeler ve yazılım güncellemeleriyle sürekli uyum sağlama gerekliliği.  
+
+**Avantajlar:**  
+  
+1. Müşteri verileri ve analizlerine dayalı güçlü içgörüler sağlama kapasitesi.   
+
+2. Müşteri ilişkileri yönetimi ve iş analizi alanında artan talep.  
+  
+3. Çeşitli sektörlerde geniş bir müşteri tabanı oluşturma potansiyeli.  
+
+**Gerçek Dünya Rakipleri ve Avantajları/Dezavantajları:**  
+
+Bu iş alanında birkaç farklı rakip türü bulunur: 
+
+*   **Büyük CRM Şirketleri:** Salesforce gibi şirketler, büyük ölçekli CRM hizmetleri  sunar. Avantajları, geniş müşteri tabanı ve kapsamlı ürün yelpazesidir. Dezavantajları,  kişiselleştirilmiş hizmet sunma konusunda zayıf olmalarıdır.  
+  
+*   **Bağımsız Danışmanlık Şirketleri:** Daha küçük ölçekte çalışan firmalar, genellikle  daha kişisel hizmet sunar. Avantajları, müşteri ile yakın ilişkiler kurabilmeleri ve esnek  olmalarıdır. Dezavantajları, büyük projeleri yürütme kapasitesinin sınırlı olmasıdır.  
+  
+*   **İç Kaynaklı CRM Takımları:** Bazı büyük şirketler, kendi CRM takımlarını kurarak  dış kaynak kullanmaktan kaçınır. Avantajları, şirket içi bilgi ve kontrolün sağlanmasıdır.  Dezavantajları, dış uzmanlığın getirdiği geniş perspektiften mahrum olmalarıdır.
