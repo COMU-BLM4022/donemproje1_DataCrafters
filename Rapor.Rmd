@@ -126,3 +126,23 @@ API, şunlar dahil olmak üzere çeşitli işlemleri gerçekleştirmek için kul
 *   Platformun sürekli olarak güncellenmesi ve geliştirilmesi, kullanıcıların ilgisini canlı tutar ve yeni özelliklerin eklenmesiyle popülerliğini artırır.
 
 Genel olarak, SuiteCRM'nin ihtiyaçlarımıza en uygun CRM platformu olduğuna inanıyoruz.SuiteCRM, sektörde geniş bir kullanıcı tabanına ve aktif bir topluluğa sahip popüler bir açık kaynaklı CRM platformudur.Bu da platformun güvenilirliğini ve kabulünü gösterir.
+
+**Q2 : Dataset tanımı**
+-------------------------------------
+
+**Veri setinin ;**
+
+*   **Adresi :** [https://query.data.world/s/37q4qpstsvfrnz252cek3hc4tbhb65?dws=00000](https://query.data.world/s/37q4qpstsvfrnz252cek3hc4tbhb65?dws=00000)
+
+*   **İçeriği :** İçerik olarak 3000’in üzerinde şirketin ; isim,adres, faaliyet alanı,ürün ve fırsat verileri, işlem hacimleri, üç aylık periyotta (QTD) satış performansları, coğrafi konum bilgileri gibi üst bilgilerden oluşmaktadır. 
+
+*   **Üretim Aşamaları :** Veri seti şirketlerin 3 aylık periyotlarda yaptığı satış performanslarının yeni satış stratejilerinin geliştirilmesine olanak sunulduğu bir araç tarafından üretilmiştir.
+
+*   **Formatı :** Veri seti XSLX formatında bir Excel dokümanıdır.
+
+*   **Boyutu :** Byte cinsinden 656 KB olup, 38 kolon ve 3215 satırdan oluşmaktadır.
+
+*   **Verinin IMS’e ithal edilişi :** Veri setini IMS’e ithal ederken öncelikle SuiteCRM’in veri tabanı yapısına uygun hale getireceğiz, bunun için SuiteCRM’in dashboard’undan Data Import kısmının bize sunduğu veri şablonunu kullanacağız. Veri setinin Şablona uyarlamasını sağladıktan sonra Data Import kısmından veriyi içeri aktaracağız.
+
+
+*   **Verinin Analizi İçin R ortamına Aktarılması :** Verinin R ortamına aktarılması için R programlama dilinin RODBC adlı paketini kullanacağız. Burada SuiteCRM verisini ODBC veri kaynağı olarak kullanıp analizleri sağlayacağız.
