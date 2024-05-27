@@ -301,3 +301,9 @@ ggplot(stage_counts, aes(x = reorder(`Sales Stage`, -OpportunityCount), y = Oppo
 ```
 
 Veri setleri incelendiğinde 7 farklı fırsat aşaması olduğu görülüyor. Bu fırsat aşamalarından en çok tercih edilenleri kapalı kazanç ve kapalı kayıp.
+
+
+
+## Q4: Veri setinin BYS platformuna ihtali
+
+SuitCRM'in sağladığını en önemli özelliklerden biri de veri import (içe aktarma) özelliğidir. SuiteCRM'in sağladığı bu özellikler sayesinde, CSV dosyalarındaki verilerin sisteme entegre edilmesi hızlı ve etkili bir şekilde gerçekleştirilebilir. Proje kapsamında, iki adet CSV uzantılı dosya, SuiteCRM'in sağladığı veri içe aktarma özelliği kullanılarak sisteme entegre edilmiştir.
