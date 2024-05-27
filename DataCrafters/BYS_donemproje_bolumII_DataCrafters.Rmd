@@ -28,3 +28,43 @@ Bu araç, üst düzey satış liderlerinin büyük miktarda veriyi incelemesine 
 - **Esneklik ve Entegrasyon:** REST API ve geniş eklenti kütüphanesi ile diğer sistemlerle entegrasyon ve özelleştirme imkanı.
 
 Bu proje, SuiteCRM'nin sunduğu araçlardan yararlanarak, şirketlerin satış stratejilerini geliştirmelerine, pazarlama verimliliğini artırmalarına ve iş süreçlerini optimize etmelerine yardımcı olmayı hedeflemektedir. Yönetici görünüm panosu, kullanıcıları gereksiz girdilerle bunaltmadan, çeşitli iş olanaklarını net bir şekilde ortaya koymak için mevcut kota ve tarihsel verilerin karşılaştırmasına dayanır.
+
+## Q2: İş Problemini Çözmede Kullanılacak Veri Seti
+
+### Veri Seti
+
+Proje kapsamında kullanılacak veri seti, CRM satış özetlerini içeren bir Excel dosyasıdır. Veri setine şu adresten erişilebilir: [https://data.world/james-1992/crm-sales-summary/workspace/file?filename=crm-data.xlsx](https://data.world/james-1992/crm-sales-summary/workspace/file?filename=crm-data.xlsx).
+
+### Veri Setinin Özeti
+
+Bu veri seti, çeyrek dönem satış performansını (QTD) izlemek için kullanılan kapsamlı bir yönetici panosunun temelini oluşturur. Bu pano, satış yöneticilerine mevcut kotaları önceki çeyreklerle karşılaştırma ve CRM verilerine dayalı ürün raporları ve fırsatları filtreleme imkanı sunar.
+
+### Veri Setinin Detayları
+
+- **Kaynak:** Veri seti, Data.World platformundan temin edilmiştir.
+
+- **İçerik:** 3000'in üzerinde şirketin isim, adres, faaliyet alanı, ürün ve fırsat verileri, işlem hacimleri, üç aylık periyotta (QTD) satış performansları ve coğrafi konum bilgilerini içermektedir.
+
+- **Format:** XSLX formatında bir Excel dokümanıdır.
+
+- **Boyut:** 656 KB, 38 kolon ve 3215 satırdan oluşmaktadır.
+
+### Veri Toplama ve Üretim Süreci
+
+- **Toplayan/Yaratanlar:** Veri seti, şirketlerin üç aylık periyotlarda yaptığı satış performanslarını analiz etmek amacıyla oluşturulmuştur. Veriler, çeşitli şirketlerin CRM sistemlerinden toplanmış ve birleştirilmiştir.
+
+- **Üretim Aşamaları:** Veri seti, satış performanslarının yeni satış stratejilerinin geliştirilmesine olanak tanıyan bir araç tarafından derlenmiştir.
+
+**Veri Üzerinde Yapılan Değişiklikler:**
+
+- **Veri Temizliği:** Eksik veya hatalı veriler temizlendi. Özellikle adres ve ürün bilgileri gibi kritik alanlardaki eksiklikler giderildi.
+
+- **Format Dönüşümleri:** Verinin SuiteCRM'in veri tabanı yapısına uygun hale getirilmesi için gerekli dönüşümler yapıldı. Örneğin, tarih formatları ve sayısal değerlerin doğruluğu kontrol edildi.
+
+- **Veri Entegrasyonu:** SuiteCRM'e veri ithalatı için gerekli olan veri şablonları kullanılarak veri seti hazırlandı.
+
+### Sentetik Veri Üretimi
+
+Bu projede sentetik veri üretimi yapılmamıştır. Ancak, veri setinin eksik veya yetersiz olduğu durumlarda ek veri ihtiyacı ortaya çıkarsa sentetik veri üretimi değerlendirilebilir.
+
+Veri seti, SuiteCRM platformuna entegre edilerek, çeyrek dönem satış performansının izlenmesi ve analiz edilmesi için kullanılacaktır. Bu veriler, satış yöneticilerinin veri yığınlarını manuel olarak inceleme zorunluluğunu ortadan kaldırarak, doğru ve hızlı sonuçlar elde etmelerine ve yeni stratejiler geliştirmelerine yardımcı olacaktır.
