@@ -1,0 +1,30 @@
+---
+title: "Bilgi Yönetim Sistemleri - Bitirme Projesi Rapor : Bekircan BOZKURT 210401001, Samet TATLICAK 200401097, Betül CENGİZ 190401029, Deniz DAĞ 210401100, Özlem Emine AYDIN DAĞ 180401115"
+author: "DataCrafters"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+  word_document: default
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
+```
+
+## Q1: İş Probleminin Tanımı
+
+Bu proje, *SuiteCRM* platformunu kullanarak satış performansını izlemek ve analiz etmek için kapsamlı bir yönetici görünüm panosu oluşturmayı amaçlamaktadır. Bu pano, satış yöneticilerine çeyrek dönem satış performansını (QTD) takip etmek için etkili bir araç sağlar. Aynı zamanda, mevcut kotayı önceki çeyreklerle karşılaştırarak satış yöneticilerinin ürün raporlarını ve fırsatlarını CRM verilerine dayanarak filtrelemelerine olanak tanır.
+
+Bu araç, üst düzey satış liderlerinin büyük miktarda veriyi incelemesine ve manuel olarak veri yığınlarını taramak zorunda kalmadan doğru sonuçlara ulaşmasına yardımcı olur. Bu genel bakış, satış yöneticilerinin yanlış bilgi ihtimali olmadan verilerden hızlı bir şekilde yeni stratejiler oluşturmasına ve dikkatlerini diğer önemli alanlara odaklamasına olanak tanır.
+
+### SuiteCRM platformunun sağladığı ana özellikler
+
+- **Satış Yönetimi:** Potansiyel müşterileri yönetme, fırsatları izleme ve satışları kapatma.
+
+- **Raporlama ve Analiz:** Satış verilerini analiz etme ve geçmiş verilerle karşılaştırma.
+
+- **Pazarlama Otomasyonu:** Müşteri segmentasyonu ve e-posta kampanyaları oluşturma.
+
+- **Esneklik ve Entegrasyon:** REST API ve geniş eklenti kütüphanesi ile diğer sistemlerle entegrasyon ve özelleştirme imkanı.
+
+Bu proje, SuiteCRM'nin sunduğu araçlardan yararlanarak, şirketlerin satış stratejilerini geliştirmelerine, pazarlama verimliliğini artırmalarına ve iş süreçlerini optimize etmelerine yardımcı olmayı hedeflemektedir. Yönetici görünüm panosu, kullanıcıları gereksiz girdilerle bunaltmadan, çeşitli iş olanaklarını net bir şekilde ortaya koymak için mevcut kota ve tarihsel verilerin karşılaştırmasına dayanır.
