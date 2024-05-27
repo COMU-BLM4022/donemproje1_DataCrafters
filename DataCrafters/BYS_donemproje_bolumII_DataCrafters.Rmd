@@ -68,3 +68,236 @@ Bu veri seti, çeyrek dönem satış performansını (QTD) izlemek için kullan�
 Bu projede sentetik veri üretimi yapılmamıştır. Ancak, veri setinin eksik veya yetersiz olduğu durumlarda ek veri ihtiyacı ortaya çıkarsa sentetik veri üretimi değerlendirilebilir.
 
 Veri seti, SuiteCRM platformuna entegre edilerek, çeyrek dönem satış performansının izlenmesi ve analiz edilmesi için kullanılacaktır. Bu veriler, satış yöneticilerinin veri yığınlarını manuel olarak inceleme zorunluluğunu ortadan kaldırarak, doğru ve hızlı sonuçlar elde etmelerine ve yeni stratejiler geliştirmelerine yardımcı olacaktır.
+
+## Q3: Veri Seti Keşifsel Analizi
+
+Bu bölümde, veri setinin keşifsel analizi yapılmıştır. 
+
+### Veri setindeki önemli sütunlar ve içerdikleri veri tipleri
+
+1. **account_id:** Müşteri veya şirket hesap ID'si (string)
+2. **account_name:** Müşteri veya şirket adı (string)
+3. **account_owned_by:** Hesabın sahibi (string)
+4. **account_type:** Hesap tipi (string)
+5. **address:** Müşteri veya şirket adresi (string)
+6. **billing_city:** Fatura şehri (string)
+7. **billing_region:** Fatura bölgesi (string)
+8. **billing_state:** Fatura durumu (string)
+9. **close_date:** Kapanış tarihi (date)
+10. **closed:** Kapanış durumu (boolean)
+11. **created_date:** Oluşturulma tarihi (date)
+12. **current_quarter:** Mevcut çeyrek (string)
+13. **days_left_before_eoq:** Mevcut çeyreğin sonuna kadar kalan günler (integer)
+14. **hide_dates:** Tarihleri gizleme durumu (boolean)
+15. **industry:** Endüstri (string)
+16. **opportunity_id:** Fırsat ID'si (string)
+17. **opportunity_name:** Fırsat adı (string)
+18. **opportunity_type:** Fırsat tipi (string)
+19. **opportunity_type_filter:** Fırsat tipi filtresi (integer)
+20. **product_name:** Ürün adı (string)
+21. **product_name_filter:** Ürün adı filtresi (integer)
+22. **stage:** Aşama (string)
+23. **today:** Bugünün tarihi (string)
+24. **won:** Kazanılan fırsat durumu (boolean)
+25. **zip_code:** Posta kodu (integer)
+26. **amount:** Miktar (decimal)
+27. **customer_count:** Müşteri sayısı (integer)
+28. **discount_granted:** Verilen indirim (decimal)
+29. **latitude:** Enlem (decimal)
+30. **longitude:** Boylam (decimal)
+31. **location:** Konum (geopoint)
+32. **number_of_records:** Kayıt sayısı (integer)
+33. **opportunity_quantity:** Fırsat miktarı (decimal)
+34. **sales:** Satışlar (string)
+35. **software_sold:** Satılan yazılım miktarı (integer)
+36. **transactions:** İşlemler (integer)
+37. **unit_price:** Birim fiyat (integer)
+38. **weekly_sales:** Haftalık satışlar (decimal)
+
+Proje kapsamında bu veri setini iki parçaya ayırıyoruz. Ön işleme sonucunda oluşan csv dosyaları(Accounts ve Opportunities) ana veri setimizi oluşturmaktadır.
+
+### Veri setlerimizin barındırdığı veri sayısı
+
+```{r}
+
+library(readxl)
+library(readr)
+library(dplyr)
+library(tidyverse)
+library(ggplot2)
+library(DT)
+
+df_excel <- read_excel("crm-data.xlsx")
+
+df_csv_acc <- read_csv("Accounts.csv")
+
+df_csv_opp <- read_csv("Opportunities.csv")
+
+df_acc_excel <- df_excel %>% select("Account Id":"Industry")
+df_opp_excel <- df_excel %>% select("Opportunity ID":"Opportunity Quantity")
+
+column_mapping <- c(
+  "Account Name" = "Name",
+  "Account Id" = "ID",
+  "Address" = "Billing Street",
+  "Billing City" = "Billing City",
+  "Billing State" = "Billing State",
+  "Industry" = "Industry",
+  "Account Type" = "Type",
+  "Created Date" = "Date Created",
+  "Closed" = "Deleted"
+)
+
+df_excel_renamed <- df_acc_excel %>%
+  rename_with(~ column_mapping[.x], .cols = names(column_mapping))
+
+df_excel_filtered <- df_excel_renamed %>%
+  select(
+    "ID",
+    "Name",
+    "Type",
+    "Billing Street",
+    "Billing City",
+    "Billing State",
+    "Date Created",
+    "Industry",
+    "Deleted"
+  )
+
+df_csv_acc$`Date Created` <- as_datetime(df_csv_acc$`Date Created`)
+df_csv_acc$`Deleted` <- as.logical(df_csv_acc$`Deleted`)
+
+df_csv_acc_updated <- bind_rows(df_csv_acc, df_excel_filtered)
+df_csv_acc_updated$`Shipping Street` <- df_csv_acc_updated$`Billing Street`
+df_csv_acc_updated$`Shipping City` <- df_csv_acc_updated$`Billing City`
+df_csv_acc_updated$`Shipping State` <- df_csv_acc_updated$`Billing State`
+write.csv(df_csv_acc_updated, "Accounts_updated.csv", row.names = FALSE)
+
+column_mapping <- c(
+  "Opportunity Name" = "Opportunity Name",
+  "Opportunity ID" = "ID",
+  "Opportunity Quantity" = "Opportunity Amount",
+  "Stage" = "Sales Stage",
+  "Opportunity Type" = "Type"
+)
+
+df_excel_renamed <- df_opp_excel %>%
+  rename_with(~ column_mapping[.x], .cols = names(column_mapping))
+
+df_excel_filtered <- df_excel_renamed %>%
+  select(
+    "ID",
+    "Opportunity Name",
+    "Type",
+    "Opportunity Amount",
+    "Sales Stage",
+    "Amount",
+    "Longitude",
+    "Latitude"
+  )
+
+df_csv_opp$`Opportunity Amount` <- as.double(df_csv_opp$`Opportunity Amount`)
+df_csv_opp$`Amount` <- as.double(df_csv_opp$`Amount`)
+df_csv_opp$`Longitude` <- as.double(df_csv_opp$`Longitude`)
+df_csv_opp$`Latitude` <- as.double(df_csv_opp$`Latitude`)
+
+df_csv_opp_updated <- bind_rows(df_csv_opp, df_excel_filtered)
+write.csv(df_csv_opp_updated, "Opportunities_updated.csv", row.names = FALSE)
+
+num_rows_acc <- nrow(df_csv_acc_updated)
+num_rows_opp <- nrow(df_csv_opp_updated)
+
+df_counts <- data.frame(
+  Dataset = c("Accounts", "Opportunities"),
+  RowCount = c(num_rows_acc, num_rows_opp)
+)
+
+ggplot(df_counts, aes(x = Dataset, y = RowCount)) +
+  geom_bar(stat = "identity", fill = "skyblue",  width = 0.25) +
+  geom_text(aes(label = RowCount), vjust = -0.3, size = 5) +
+  theme_minimal() +
+  labs(x = "Dataset",
+       y = "Amount")
+
+```
+
+Account veri setimizin 9645, Opportunities veri setimizin 3215 tane verisi bulunmaktadır.
+
+### Account veri seti
+
+```{r}
+
+datatable(df_csv_acc_updated,, colnames = c('#' = 1), class = 'cell-border stripe',  style = "bootstrap5", options = list(
+  server = TRUE,
+  processing = TRUE,
+  searching = FALSE,
+  scrollX = TRUE,
+  scrollY = 400,
+  autoWidth = TRUE,
+  pageLength = 5,
+  columnDefs = list(
+    list(targets = "_all", className = "dt-center")
+  )
+))
+```
+
+Account veri seti id, isim, oluşturulma tarihi, adres gibi verileri barındırmaktadır.
+
+### Opportunities veri seti
+
+```{r}
+datatable(df_csv_opp_updated, colnames = c('#' = 1), class = 'cell-border stripe', style = "bootstrap5", options = list(
+  server = TRUE,
+  processing = TRUE,
+  searching = FALSE,
+  scrollX = TRUE,
+  scrollY = 400,
+  autoWidth = TRUE,
+  pageLength = 5,
+  columnDefs = list(
+    list(targets = "_all", className = "dt-center")
+  )
+))
+```
+
+Opportunities veri seti id, isim,tip, satış aşaması gibi verileri barındırmaktadır.
+
+### Sektörlere Göre Hesap Sayısı
+
+```{r}
+industry_counts <- df_csv_acc_updated %>%
+  group_by(Industry) %>%
+  summarise(AccountCount = n()) %>%
+  arrange(desc(AccountCount))
+
+ggplot(industry_counts, aes(x = reorder(Industry, -AccountCount), y = AccountCount)) +
+  geom_bar(stat = "identity", fill = "coral", width = 0.5) +
+  geom_text(aes(label = AccountCount), vjust = -0.5, size = 3.5) +
+  theme_minimal() +
+  labs(x = "Sektör", y = "Hesap Sayısı") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+```
+
+Veri setleri incelendiğinde 39 farklı sektörde hesap bulunduğu görülüyor. Bu sektörlerden en çok tercih edilenleri sağlık, teknoloji ve finans hizmetleridir.
+
+### Fırsat Aşamalarına Göre Fırsat Sayısı
+
+```{r}
+# Fırsat aşamalarına göre fırsat sayısını hesaplama
+stage_counts <- df_csv_opp_updated %>%
+  group_by(`Sales Stage`) %>%
+  summarise(OpportunityCount = n()) %>%
+  arrange(desc(OpportunityCount))
+
+# Sütun grafiği oluşturma
+ggplot(stage_counts, aes(x = reorder(`Sales Stage`, -OpportunityCount), y = OpportunityCount, fill = `Sales Stage`)) +
+  geom_bar(stat = "identity", width = 0.7) +
+  geom_text(aes(label = OpportunityCount), vjust = -0.5, size = 3.5) +
+  theme_minimal() +
+  labs(x = "Fırsat Aşaması", y = "Fırsat Sayısı") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1), legend.position = "none")
+
+```
+
+Veri setleri incelendiğinde 7 farklı fırsat aşaması olduğu görülüyor. Bu fırsat aşamalarından en çok tercih edilenleri kapalı kazanç ve kapalı kayıp.
