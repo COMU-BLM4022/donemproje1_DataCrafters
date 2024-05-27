@@ -307,3 +307,17 @@ Veri setleri incelendiğinde 7 farklı fırsat aşaması olduğu görülüyor. B
 ## Q4: Veri setinin BYS platformuna ihtali
 
 SuitCRM'in sağladığını en önemli özelliklerden biri de veri import (içe aktarma) özelliğidir. SuiteCRM'in sağladığı bu özellikler sayesinde, CSV dosyalarındaki verilerin sisteme entegre edilmesi hızlı ve etkili bir şekilde gerçekleştirilebilir. Proje kapsamında, iki adet CSV uzantılı dosya, SuiteCRM'in sağladığı veri içe aktarma özelliği kullanılarak sisteme entegre edilmiştir.
+
+## Q5 : Yapılması planlanan veri analizi
+
+1. Kategori ve Sınıflara Göre Analiz
+Müşteri türü, endüstri, coğrafi konum gibi kategorilere göre verileri ayırarak analizler yapabiliriz. Örneğin: Farklı endüstrilerdeki yıllık gelir ortalamaları, Şehir bazında toplam satışlar, fırsatların satış aşamalarına göre dağılımı
+
+2. Grafiksel Analiz ve Görselleştirme
+Verilerden anlamlı grafikler oluşturmak, içgörüleri görselleştirerek daha iyi anlamamıza yardımcı olur. Önerilen grafikler: Şehirlere göre toplam satış tutarı (bar chart), fırsat aşamalarına göre fırsat sayısı (bar chart), endüstrilere göre ortalama yıllık gelir (bar chart veya pie chart)
+
+3. İstatistiksel Analizler
+Ortalama, medyan, varyans gibi temel istatistiksel metriklerle verilerin genel eğilimlerini ve dağılımlarını analiz edebiliriz. Bu analizler, hangi müşteri segmentlerinin daha karlı olduğunu veya hangi fırsat türlerinin daha yüksek başarı oranına sahip olduğunu anlamamıza yardımcı olur.
+
+4. Senaryo Analizi ve Sentetik Veri Üretimi
+Farklı senaryolar oluşturarak, belirli stratejilerin nasıl performans göstereceğini analiz edebiliriz. Örneğin, satış stratejilerinin farklı müşteri segmentlerinde nasıl etkili olduğunu görmek için sentetik veri üretilebilir.
