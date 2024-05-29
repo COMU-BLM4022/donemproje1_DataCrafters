@@ -126,6 +126,7 @@ library(dplyr)
 library(tidyverse)
 library(ggplot2)
 library(DT)
+library(stringdist)
 
 df_excel <- read_excel("crm-data.xlsx")
 
@@ -133,8 +134,8 @@ df_csv_acc <- read_csv("Accounts.csv")
 
 df_csv_opp <- read_csv("Opportunities.csv")
 
-df_acc_excel <- df_excel %>% select("Account Id":"Industry")
-df_opp_excel <- df_excel %>% select("Opportunity ID":"Opportunity Quantity")
+df_acc_excel <- df_excel %>% select("Account Id":"Industry", "Longitude", "Latitude")
+df_opp_excel <- df_excel %>% select("Opportunity ID":"Opportunity Quantity", "Created Date", "Close Date")
 
 column_mapping <- c(
   "Account Name" = "Name",
@@ -161,24 +162,61 @@ df_excel_filtered <- df_excel_renamed %>%
     "Billing State",
     "Date Created",
     "Industry",
-    "Deleted"
+    "Deleted",
+    "Longitude",
+    "Latitude"
   )
 
 df_csv_acc$`Date Created` <- as_datetime(df_csv_acc$`Date Created`)
 df_csv_acc$`Deleted` <- as.logical(df_csv_acc$`Deleted`)
+df_csv_acc$`Longitude` <- as.double(df_csv_acc$`Longitude`)
+df_csv_acc$`Latitude` <- as.double(df_csv_acc$`Latitude`)
 
 df_csv_acc_updated <- bind_rows(df_csv_acc, df_excel_filtered)
 df_csv_acc_updated$`Shipping Street` <- df_csv_acc_updated$`Billing Street`
 df_csv_acc_updated$`Shipping City` <- df_csv_acc_updated$`Billing City`
 df_csv_acc_updated$`Shipping State` <- df_csv_acc_updated$`Billing State`
-write.csv(df_csv_acc_updated, "Accounts_updated.csv", row.names = FALSE)
+
+esik_orani <- 0.3
+
+ornek_liste <- c("Apparel", "Banking", "Biotechnology", "Chemicals", "Communications", "Construction", "Consulting", "Education", "Electronics", "Energy", "Engineering", "Entertainment", "Environmental", "Finance", "Government", "Healthcare", "Hospitality", "Insurance", "Machinery", "Manufacturing", "Media", "Not For Profit", "Recreation", "Retail", "Shipping", "Technology", "Telecommunications", "Transportation", "Utilities", "Other")
+
+en_yuksek_benzerlik <- function(deger, ornek_liste, esik_orani) {
+  benzerlik_oranlari <- 1 - stringdist::stringdistmatrix(deger, ornek_liste, method = "jw")
+  max_index <- which.max(benzerlik_oranlari)
+  max_oran <- benzerlik_oranlari[max_index]
+  
+  if (max_oran > esik_orani) {
+    return(ornek_liste[max_index])
+  } else {
+    return("Other")
+  }
+}
+
+df_csv_acc_updated$`Industry` <- sapply(df_csv_acc_updated$`Industry`, en_yuksek_benzerlik, ornek_liste, esik_orani)
+
+df_csv_acc_updated$`Type` <- "Other"
+
+temp <- df_csv_acc_updated
+df_csv_acc_updated <- df_csv_acc_updated %>%
+  group_by(Name) %>%
+  summarize_all(funs(first))
+
+df_csv_acc_updated_noNA <- df_csv_acc_updated %>% mutate_all(~ ifelse(is.na(.), "", .))
+df_csv_acc_updated_noNA <- df_csv_acc_updated_noNA %>%
+  mutate(Deleted = ifelse(Deleted == "true", 1, 0))
+df_csv_acc_updated_noNA$`Date Created` <- as.POSIXct(df_csv_acc_updated_noNA$`Date Created`, origin="1970-01-01", tz="UTC")
+df_csv_acc_updated_noNA$`Date Created` <- format(df_csv_acc_updated_noNA$`Date Created`, "%Y-%m-%d %H:%M:%S")
+write.csv(df_csv_acc_updated_noNA, "Accounts_updated_noNA.csv", row.names = FALSE)
 
 column_mapping <- c(
   "Opportunity Name" = "Opportunity Name",
   "Opportunity ID" = "ID",
   "Opportunity Quantity" = "Opportunity Amount",
   "Stage" = "Sales Stage",
-  "Opportunity Type" = "Type"
+  "Opportunity Type" = "Type",
+  "Created Date" = "Date Created",
+  "Close Date" = "Expected Close Date"
 )
 
 df_excel_renamed <- df_opp_excel %>%
@@ -193,16 +231,27 @@ df_excel_filtered <- df_excel_renamed %>%
     "Sales Stage",
     "Amount",
     "Longitude",
-    "Latitude"
+    "Latitude",
+    "Date Created",
+    "Expected Close Date"
   )
 
+df_csv_opp$`Date Created` <- as_datetime(df_csv_opp$`Date Created`)
+df_csv_opp$`Expected Close Date` <- as_datetime(df_csv_opp$`Expected Close Date`)
 df_csv_opp$`Opportunity Amount` <- as.double(df_csv_opp$`Opportunity Amount`)
 df_csv_opp$`Amount` <- as.double(df_csv_opp$`Amount`)
 df_csv_opp$`Longitude` <- as.double(df_csv_opp$`Longitude`)
 df_csv_opp$`Latitude` <- as.double(df_csv_opp$`Latitude`)
 
 df_csv_opp_updated <- bind_rows(df_csv_opp, df_excel_filtered)
-write.csv(df_csv_opp_updated, "Opportunities_updated.csv", row.names = FALSE)
+df_csv_opp_updated$`Account Name` <- temp$`Name`
+
+df_csv_opp_updated_noNA <- df_csv_opp_updated %>% mutate_all(~ ifelse(is.na(.), "", .))
+df_csv_opp_updated_noNA$`Date Created` <- as.POSIXct(df_csv_opp_updated_noNA$`Date Created`, origin="1970-01-01", tz="UTC")
+df_csv_opp_updated_noNA$`Date Created` <- format(df_csv_opp_updated_noNA$`Date Created`, "%m/%d/%Y %H:%M")
+df_csv_opp_updated_noNA$`Expected Close Date` <- as.POSIXct(df_csv_opp_updated_noNA$`Expected Close Date`, format="%m/%d/%Y %H:%M", tz="UTC")
+df_csv_opp_updated_noNA$`Expected Close Date` <- format(df_csv_opp_updated_noNA$`Expected Close Date`, "%m/%d/%Y")
+write.csv(df_csv_opp_updated_noNA, "Opportunities_updated_noNA.csv", row.names = FALSE)
 
 num_rows_acc <- nrow(df_csv_acc_updated)
 num_rows_opp <- nrow(df_csv_opp_updated)
@@ -221,13 +270,13 @@ ggplot(df_counts, aes(x = Dataset, y = RowCount)) +
 
 ```
 
-Account veri setimizin 9645, Opportunities veri setimizin 3215 tane verisi bulunmaktadır.
+Account veri setimizin 696, Opportunities veri setimizin 3215 tane verisi bulunmaktadır.
 
 ### Account veri seti
 
 ```{r}
 
-datatable(df_csv_acc_updated,, colnames = c('#' = 1), class = 'cell-border stripe',  style = "bootstrap5", options = list(
+datatable(df_csv_acc_updated_noNA,, colnames = c('#' = 1), class = 'cell-border stripe',  style = "bootstrap5", options = list(
   server = TRUE,
   processing = TRUE,
   searching = FALSE,
@@ -246,7 +295,7 @@ Account veri seti id, isim, oluşturulma tarihi, adres gibi verileri barındırm
 ### Opportunities veri seti
 
 ```{r}
-datatable(df_csv_opp_updated, colnames = c('#' = 1), class = 'cell-border stripe', style = "bootstrap5", options = list(
+datatable(df_csv_opp_updated_noNA, colnames = c('#' = 1), class = 'cell-border stripe', style = "bootstrap5", options = list(
   server = TRUE,
   processing = TRUE,
   searching = FALSE,
@@ -279,7 +328,7 @@ ggplot(industry_counts, aes(x = reorder(Industry, -AccountCount), y = AccountCou
 
 ```
 
-Veri setleri incelendiğinde 39 farklı sektörde hesap bulunduğu görülüyor. Bu sektörlerden en çok tercih edilenleri sağlık, teknoloji ve finans hizmetleridir.
+Veri setleri incelendiğinde 39 farklı sektörde hesap bulunduğu görülüyor. Bu sektörlerden en çok tercih edilenleri teknoloji ve sağlık hizmetleridir.
 
 ### Fırsat Aşamalarına Göre Fırsat Sayısı
 
@@ -321,3 +370,7 @@ Ortalama, medyan, varyans gibi temel istatistiksel metriklerle verilerin genel e
 
 4. Senaryo Analizi ve Sentetik Veri Üretimi
 Farklı senaryolar oluşturarak, belirli stratejilerin nasıl performans göstereceğini analiz edebiliriz. Örneğin, satış stratejilerinin farklı müşteri segmentlerinde nasıl etkili olduğunu görmek için sentetik veri üretilebilir.
+
+## Q6 : Çalışan platformun gösterildiği sesli anlatımlı video
+
+Video adresi: [https://www.youtube.com/watch?v=Jp5VsvYLxSc](https://www.youtube.com/watch?v=Jp5VsvYLxSc)
