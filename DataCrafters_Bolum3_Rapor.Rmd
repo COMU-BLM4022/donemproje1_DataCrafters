@@ -1,0 +1,213 @@
+---
+title: "Analiz"
+author: "DataCrafters"
+date: "2024-06-09"
+output:
+  html_document:
+    theme: journal
+    toc: true
+    toc_float: true
+  word_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
+```
+
+```{r}
+
+library(httr)
+library(jsonlite)
+library(ggplot2)
+library(dplyr)
+library(lubridate)
+library(glue)
+library(plotly)
+
+getAccessToken <- function() {
+  url <- "http://37.148.210.165:8082/legacy/Api/access_token"
+  body <- list(
+    grant_type = "password",
+    client_id = "662b67a9-38d8-153d-7100-6665049ce30f",
+    client_secret = "xcNEp/ice+PfgJAE3iHFlhnPHzlznfx0QIxhOie61Uw=",
+    username = "datacrafters",
+    password = "suitecrm"
+  )
+
+  response <- POST(url, body = body)
+  content <- content(response, "text")
+  access_token <- jsonlite::fromJSON(content)$access_token
+  return(access_token)
+}
+
+getAccounts <- function(access_token) {
+  url <- "http://37.148.210.165:8082/legacy/Api/V8/module/Accounts?page[size]=1000"
+  headers <- add_headers(
+    "Content-Type" = "application/json",
+    "Authorization" = paste("Bearer", access_token)
+  )
+
+  response <- GET(url, headers)
+  content <- content(response, "text", encoding = "UTF-8")
+  accounts <- fromJSON(content, flatten = TRUE)
+  accountsData <- as.data.frame(accounts$data)
+
+  return(accountsData)
+}
+
+getOpportunities <- function(access_token,page_size = 1000, page_number = 1) {
+  globalOpportunities <- data.frame()
+
+  while(TRUE) {
+
+    url <- glue("http://37.148.210.165:8082/legacy/Api/V8/module/Opportunities?page[size]={page_size}&page[number]={page_number}")
+    headers <- add_headers(
+      "Content-Type" = "application/json",
+      "Authorization" = paste("Bearer", access_token)
+    )
+
+    response <- GET(url, headers)
+    content <- content(response, "text", encoding = "UTF-8")
+    opportunities <- fromJSON(content, flatten = TRUE)
+
+    opportunitiesData <- as.data.frame(opportunities$data)
+    globalOpportunities <- rbind(globalOpportunities,opportunitiesData)
+
+    totalPage <- opportunities$meta$`total-pages`
+
+    if(page_number >= totalPage){
+      break
+    }else{
+      page_number <- page_number + 1
+    }
+  }
+  return(globalOpportunities)
+}
+
+accessToken <- getAccessToken()
+
+accountsData <- getAccounts(accessToken)
+oppData <- getOpportunities(accessToken)
+oppData$attributes.amount <- as.numeric(oppData$attributes.amount)
+summary_oppData <- oppData %>%
+  group_by(attributes.account_id) %>%
+  summarize(attributes.amount = sum(attributes.amount, na.rm = TRUE))
+
+merged_df <- merge(oppData, accountsData, by.x = "attributes.account_id", by.y = "id")
+merged_df$attributes.amount <- as.numeric(merged_df$attributes.amount)
+merged_df$attributes.billing_address_state <- as.factor(merged_df$attributes.billing_address_state)
+```
+
+## Analiz 1: Endüstriye Göre Satış Dağılımı
+
+```{r}
+
+groupedData <- merged_df %>%
+  group_by(attributes.industry) %>%
+  summarize(total_amount = sum(attributes.amount, na.rm = TRUE))
+
+fig <- plot_ly(groupedData, labels = ~attributes.industry, values = ~total_amount, type = "pie")
+
+fig <- fig %>% layout(title = "Endüstriye göre satış dağılımı", margin = list(t = 60, b = 50))
+
+fig
+```
+
+Şirketimizden danışmanlık alan müşterimiz yeni bir satış faaliyet alanında hizmet vermeyi düşünmektedir. En çok satış yapabileceği faaliyet alanı verilerimize göre teknoloji alanıdır. Yukarıda sektörlere göre toplam satışların oranlarını gösteren grafik bulunmaktadır.
+
+## Analiz 2: Eyalete Göre Teknoloji Endüstrisi
+
+```{r}
+
+tech_sales <- merged_df %>% 
+  filter(attributes.industry == "Technology")
+
+tech_sales_by_state <- aggregate(tech_sales$attributes.amount ~ tech_sales$attributes.billing_address_state, merged_df, sum, na.rm = TRUE)
+
+colnames(tech_sales_by_state) <- c("billing_state", "amount")
+
+ggplot(tech_sales_by_state, aes(x = billing_state, y = amount)) +
+  geom_bar(stat = "identity", fill = "red") +
+  labs(title = "Eyalete göre teknoloji endüstrisi",
+       x = "Eyalet",
+       y = "Toplam Satış") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 55, vjust = 0.5, hjust=1), plot.margin = unit(c(1, 1, 1, 1), "cm"))
+```
+
+Analizlerimiz sonucu müşterimiz teknoloji alanında faaliyete geçmeyi kararlaştırmış fakat hangi eyalette faaliyete geçeceğini bilmemektedir. İkinci bir analiz yaparak müşterimizin faaliyete geçerse yüksek oranlarda satış yapabileceği eyaletleri sunduk. California, Michigan ve Illionis en çok satış yapılan ve yapılması muhtemel eyaletler olarak müşterimize sunuldu. Yukarıda teknoloji endüstrisinin satışlarının eyalet bazında değerlerini gösteren grafik bulunmaktadır.
+
+## Analiz 3: 2015 Yılı Teknoloji Endüstrisinin Çeyrek Dönem Satış Değerleri
+
+```{r}
+
+sales_by_acc <- merged_df[merged_df$attributes.industry == "Technology", ]
+
+title_variable <- paste("Industry:", sales_by_acc$attributes.industry[1])
+
+sales_by_acc$attributes.date_closed <- as.POSIXct(sales_by_acc$attributes.date_closed, origin="1970-01-01")
+
+quarter1 <- sales_by_acc[sales_by_acc$attributes.date_closed >= as.POSIXct("2015-01-01") & sales_by_acc$attributes.date_closed < as.POSIXct("2015-03-01"), ]
+
+quarter2 <- sales_by_acc[sales_by_acc$attributes.date_closed >= as.POSIXct("2015-04-01") & sales_by_acc$attributes.date_closed < as.POSIXct("2015-07-01"), ]
+
+quarterSum1 <- sum(quarter1$attributes.amount)
+quarterSum2 <- sum(quarter2$attributes.amount)
+
+df <- data.frame(degerler = c("2015'in birinci çeyreği", "2015'in ikinci çeyreği"),
+                 deger = c(quarterSum1, quarterSum2))
+
+ggplot(df, aes(x = degerler, y = deger)) +
+  geom_bar(stat = "identity", fill = "red", width = 0.25) +
+  labs(title = "2015 yılına ait teknoloji endüstrisinin çeyrek dönem satış değerleri",
+       x = title_variable, y = NULL) +
+  theme_minimal()+
+  theme(plot.margin = unit(c(1, 1, 1, 1), "cm"))
+
+```
+
+İkinci çeyrekteki yükselen satışlar, pazarlama kampanyalarının ve satış stratejilerinin etkili olduğunu göstermektedir. Birinci çeyrekteki düşüş, o dönemde satışların azaldığını veya belirli faktörlerin etkili olduğunu
+gösterebilir. Bu verilere dayanarak, gelecekteki çeyreklerde benzer düşüşleri önlemek için belirli önlemler alınabilir. Yukarıda 2015 yılına ait teknoloji endüstrisinin çeyrek dönem satış değerlerini gösteren grafik bulunmaktadır.
+
+## Analiz 4: Yazılım Fırsatlarının Durum Dağılımı
+
+```{r}
+
+oppGroupBy <- oppData %>% 
+  filter(attributes.opportunity_type == "Software") %>%
+  group_by(attributes.sales_stage) %>%
+  summarise(total_amount = n()) %>%
+  arrange(desc(total_amount))
+
+colnames(oppGroupBy) <- c("sales_stage", "total_amount")
+
+total_count <- sum(oppGroupBy$total_amount)
+oppGroupBy$percent_total <- (oppGroupBy$total_amount / total_count) * 100
+
+oppGroupBy$hover_text <- paste(round(oppGroupBy$percent_total, 2), "%")
+
+fig <- plot_ly(
+  type = "funnel",
+  y = oppGroupBy$sales_stage,
+  x = oppGroupBy$total_amount,
+  text = oppGroupBy$hover_text,
+  hoverinfo = "text",
+  textinfo = "value"
+)
+
+fig <- fig %>%
+  layout(title = "Yazılım tipindeki fırsatların durum dağılımı",
+         yaxis = list(categoryarray = oppGroupBy$sales_stage), 
+         margin = list(t = 60, b = 50))
+fig
+
+```
+
+Teknoloji alanında satış faaliyeti göstermeyi planlayan müşterimize, yazılım alanındaki fırsatların durumlarını sunduk. Yukarıda yazılım sektöründeki fırsatların değerlendirildiği grafik bulunmaktadır.
+
+## Sonuç
+
+Müşterimizin isteği doğrultusunda satış yapacağı endüstriyi belirleyerek analizlerimize başladık. Satış faaliyetlerine hangi eyaletlerde gerçekleştirebileceğine yönelik ikinci bir analiz sunduk. Yapılan satışların yılın belirli çeyrekliklerindeki durumlarını müşterimize sunarak önlem alabileceği konuları araştırmasında zaman tanıdık.
+Son olarak ise teknoloji alanında yazılım sektöründe yüksek fırsat oranları olduğuna dair verilerimizi paylaştık.
+
+Data Crafters Company olarak müşterilerimiz için satış verilerini analiz etmeye, potansiyel fırsatları,sektörleri ve coğrafi bölgeleri belirleyerek müşterilerimize hedefleri ve istekleri doğrultusunda analiz danışmanlığında hizmeti vermeye devam ediyoruz.
